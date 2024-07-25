@@ -4,7 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -12,9 +15,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+public class MainController implements Initializable {
+
+    private URL location;
+    private ResourceBundle resources;
+
     @FXML
     private GridPane matrix;
 
@@ -55,21 +63,13 @@ public class HelloController implements Initializable {
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for (int row = 0; row < MATRIX.length; row++) {
-            for (int col = 0; col < MATRIX[row].length; col++) {
-                Text number = new Text(!HIDE[row][col] ? String.valueOf(MATRIX[row][col]) : " ");
-                number.setFont(new Font("Fira Code Regular", 18));
-                number.setTranslateX(col < 3 ? 20 : 23);
-                matrix.add(number, col, row);
-            }
-        }
-        currentMatrix = new int[MATRIX.length][MATRIX.length];
+        init();
     }
 
     @FXML
     protected void onClick(MouseEvent event)
     {
-        if (attempt == 0)
+        if (attempt == 0 || selectedNumber == null)
             return;
 
         Node clickedNode = event.getPickResult().getIntersectedNode();
@@ -78,7 +78,7 @@ public class HelloController implements Initializable {
             Integer row = GridPane.getRowIndex(clickedNode);
             if (clickedNode instanceof Text) {
                 if (currentMatrix[row][col] == 0 || currentMatrix[row][col] == -1) {
-                    currentMatrix[row][col] = selectedNumber != null ? Integer.parseInt(selectedNumber.getText()) : 1;
+                    currentMatrix[row][col] = Integer.parseInt(selectedNumber.getText());
 
                     boolean mistake = currentMatrix[row][col] != MATRIX[row][col];
                     Text replace = (Text) clickedNode;
@@ -90,6 +90,20 @@ public class HelloController implements Initializable {
                     }
                 }
                 highlight();
+            }
+        }
+
+        if (attempt == 0) {
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
+            Alert failureMsg = new Alert(Alert.AlertType.CONFIRMATION, "You ran out of attempts. Play again?", yes, no);
+            Optional<ButtonType> result = failureMsg.showAndWait();
+
+            if (!result.isPresent() || result.get() == no) {
+                failureMsg.close();
+            } else if (result.get() == yes) {
+                failureMsg.close();
+                reset();
             }
         }
     }
@@ -113,5 +127,25 @@ public class HelloController implements Initializable {
                     display.setFill(Color.BLACK);
             }
         });
+    }
+
+    private void reset() {
+        matrix.getChildren().removeIf(child -> child instanceof Text);
+        attempt = MAX_ATTEMPTS;
+        attemptsRemaining.setText(attempt + "/" + MAX_ATTEMPTS);
+        selectedNumber = null;
+        init();
+    }
+
+    private void init() {
+        for (int row = 0; row < MATRIX.length; row++) {
+            for (int col = 0; col < MATRIX[row].length; col++) {
+                Text number = new Text(!HIDE[row][col] ? String.valueOf(MATRIX[row][col]) : " ");
+                number.setFont(new Font("Fira Code Regular", 18));
+                number.setTranslateX(col < 3 ? 20 : 23);
+                matrix.add(number, col, row);
+            }
+        }
+        currentMatrix = new int[MATRIX.length][MATRIX.length];
     }
 }

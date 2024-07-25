@@ -58,15 +58,15 @@
    </GridPane>
    <ToolBar prefHeight="41.0" prefWidth="255.0">
      <items>
-         <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onSelectNumberClick" text="1" textAlignment="CENTER" />
-         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" onAction="#onSelectNumberClick" text="2" textAlignment="CENTER" />
-         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="10.0" onAction="#onSelectNumberClick" text="3" textAlignment="CENTER" />
-         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="10.0" onAction="#onSelectNumberClick" text="4" textAlignment="CENTER" />
-         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="10.0" onAction="#onSelectNumberClick" text="5" textAlignment="CENTER" />
-         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="104.0" layoutY="10.0" onAction="#onSelectNumberClick" text="6" textAlignment="CENTER" />
-         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="128.0" layoutY="10.0" onAction="#onSelectNumberClick" text="7" textAlignment="CENTER" />
-         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="151.0" layoutY="10.0" onAction="#onSelectNumberClick" text="8" textAlignment="CENTER" />
-         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="175.0" layoutY="10.0" onAction="#onSelectNumberClick" text="9" textAlignment="CENTER" />
+         <Button fx:id="defaultNumber" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" onAction="#onSelectNumberClick" text="1" textAlignment="CENTER" />
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="10.0" layoutY="10.0" onAction="#onSelectNumberClick" text="2" textAlignment="CENTER" />
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="34.0" layoutY="10.0" onAction="#onSelectNumberClick" text="3" textAlignment="CENTER" />
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="34.0" layoutY="10.0" onAction="#onSelectNumberClick" text="4" textAlignment="CENTER" />
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="81.0" layoutY="10.0" onAction="#onSelectNumberClick" text="5" textAlignment="CENTER" />
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="104.0" layoutY="10.0" onAction="#onSelectNumberClick" text="6" textAlignment="CENTER" />
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="128.0" layoutY="10.0" onAction="#onSelectNumberClick" text="7" textAlignment="CENTER" />
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="151.0" layoutY="10.0" onAction="#onSelectNumberClick" text="8" textAlignment="CENTER" />
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="175.0" layoutY="10.0" onAction="#onSelectNumberClick" text="9" textAlignment="CENTER" />
      </items>
    </ToolBar>
 </VBox>
